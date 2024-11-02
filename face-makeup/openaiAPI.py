@@ -42,7 +42,7 @@ def download_and_save_image(image_url, save_path="output_image.jpg"):
 
 # Example usage
 def draftPrompt(userRequest):
-    return userRequest + " Generate a json file of hair, upper lip, lower lip, left eye, and right eye color in this format: [[b, g, r], [b, g, r],[b, g, r], [b, g, r], [b, g, r]]. Just generate the array only without any text."
+    return userRequest + " Generate a json file of hair, upper lip, lower lip, left eye, and right eye color for the requested makeup in this format: [[r, g, b], [r, g, b],[r, g, b], [r, g, b], [r, g, b]]. Just generate the array only without any text."
 
 def getResponseColors(text, image_path=None):
     response = get_multimodal_response(image_path, text)

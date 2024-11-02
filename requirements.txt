@@ -6,3 +6,4 @@ torchvision
 requests
 scikit-image
 pyaudio
+wave

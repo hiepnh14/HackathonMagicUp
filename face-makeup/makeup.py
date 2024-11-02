@@ -32,7 +32,7 @@ def sharpen(img):
 
 
 def changePartColor(image, parsing, part=17, color=[230, 50, 20]):
-    b, g, r = color      #[10, 50, 250]       # [10, 250, 10]
+    r, g, b = color      #[10, 50, 250]       # [10, 250, 10]
     tar_color = np.zeros_like(image)
     tar_color[:, :, 0] = b
     tar_color[:, :, 1] = g
