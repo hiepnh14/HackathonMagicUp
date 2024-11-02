@@ -7,3 +7,5 @@ requests
 scikit-image
 pyaudio
 wave
+pyttsx3
+pytz

@@ -25,6 +25,17 @@ def get_multimodal_response(image_path, text_prompt):
     return response
 
 def download_and_save_image(image_url, save_path="output_image.jpg"):
+    """
+    Downloads an image from a given URL and saves it to a specified path.
+    Args:
+        image_url (str): The URL of the image to download.
+        save_path (str, optional): The path where the image will be saved. Defaults to "output_image.jpg".
+    Returns:
+        None
+    Raises:
+        requests.exceptions.RequestException: If there is an issue with the HTTP request.
+        IOError: If there is an issue saving the image.
+    """
     # Download the image from the URL
     image_response = requests.get(image_url)
     
@@ -40,8 +51,16 @@ def download_and_save_image(image_url, save_path="output_image.jpg"):
     else:
         print("Failed to download image")
 
-# Example usage
 def draftPrompt(userRequest):
+    """
+    Appends a specific instruction to the user's request for generating a JSON file 
+   
+    Args:
+        userRequest (str): The initial request from the user.
+
+    Returns:
+        str: The modified request with the appended instruction to generate a JSON 
+    """
     return userRequest + " Generate a json file of hair, upper lip, lower lip, left eye, and right eye color for the requested makeup in this format: [[r, g, b], [r, g, b],[r, g, b], [r, g, b], [r, g, b]]. Just generate the array only without any text."
 
 def getResponseColors(text, image_path=None):
@@ -50,7 +69,6 @@ def getResponseColors(text, image_path=None):
 
 def processResponse(response):
     dataString = response['choices'][0]['message']['content']
-    colors= []
     cleaned_string = re.sub(r"```json\n|\n```", "", dataString)
 
 # Step 2: Parse the cleaned JSON string
