@@ -1,0 +1,8 @@
+openai
+opencv-python
+numpy
+torch
+torchvision
+requests
+scikit-image
+pyaudio
