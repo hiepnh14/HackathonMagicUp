@@ -8,8 +8,9 @@ def applyMakeup(image_path, userRequest):
     # colors = [[255, 0, 0], [200, 0, 0], [255, 255, 255], [30, 30, 30], [30, 30, 30]]
     makeup(image_path, colors)
 
-def main(userRequest=None):
-    image_path = "image.jpeg"
+def main(userRequest=None, image_path=None):
+    if not image_path:
+        image_path = "image.jpeg"
     script_dir = os.path.dirname(__file__)
     image_path = os.path.join(script_dir, image_path)
     if not userRequest:
