@@ -51,6 +51,8 @@ def evaluate(image_path='./imgs/116.jpg', cp='cp/79999_iter.pth'):
 
     # if not os.path.exists(respth):
     #     os.makedirs(respth)
+    print("Starting evaluation with image:", image_path)
+    print("Loading model checkpoint from:", cp)
     script_dir = os.path.dirname(__file__)
     cp = os.path.join(script_dir, cp)
     n_classes = 19
@@ -58,6 +60,7 @@ def evaluate(image_path='./imgs/116.jpg', cp='cp/79999_iter.pth'):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # net.cuda()
     # net.load_state_dict(torch.load(cp))
+    # net.load_state_dict(torch.load(cp, map_location=device))
     net.load_state_dict(torch.load(cp, map_location=device))
     net.eval()
 

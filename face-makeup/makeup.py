@@ -83,10 +83,13 @@ def makeup(image_path, colors, cp='cp/79999_iter.pth'):
     }
 
     # image_path = args.img_path
-
+    
     image = cv2.imread(image_path)
     ori = image.copy()
+    if not os.path.exists(cp):
+        raise FileNotFoundError(f"Model checkpoint file not found at {cp}")
     parsing = evaluate(image_path, cp)
+    print("right here net cry!!")
     # parsing = cv2.resize(parsing, image.shape[0:2], interpolation=cv2.INTER_NEAREST)
     parsing = cv2.resize(parsing, (image.shape[1], image.shape[0]), interpolation=cv2.INTER_NEAREST)
 

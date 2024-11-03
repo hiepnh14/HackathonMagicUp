@@ -17,7 +17,6 @@ class MagicUpApp:
         self.root.attributes("-fullscreen", True)  # Fullscreen
         self.root.bind("<Escape>", lambda e: self.root.quit())  # Press 'Esc' to exit fullscreen
         self.request = request
-        # Initialize OpenCV's face cascade classifier
         self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
         # Flags and timers
@@ -31,6 +30,7 @@ class MagicUpApp:
 
         self.prompt_label = tk.Label(root, text="No face detected", font=("Arial", 24), fg="white", bg="black", wraplength=800, justify="center")
         self.prompt_label.place(relx=0.5, rely=0.75, anchor="n")
+
         # Initialize webcam audio device
         self.webcam_index = get_webcam_index()
         if self.webcam_index is None:
@@ -42,19 +42,32 @@ class MagicUpApp:
             print("Error: Could not open video device.")
             return
 
-        # Start the video stream thread
+        # Start video and audio threads
         threading.Thread(target=self.update_frame, daemon=True).start()
         self.start_listening()
         
 
-        
+    
 
-    def open_image(self, image_path = "generated_image.png"):
-        # Create a new Toplevel window and show the image in full-screen
+    def open_image(self, image_path="generated_image.png"):
+        """Open a resized image view in a new window without distortion."""
         new_window = tk.Toplevel(self.root)
+        new_window.title("Image Viewer")
         script_dir = os.path.dirname(__file__)
         image_path = os.path.join(script_dir, image_path)
-        ImageViewer(new_window, image_path)
+
+        # Load and resize the image to fit the window size, for example, 800x600
+        original_image = Image.open(image_path)
+        resized_image = original_image.resize((800, 600), Image.LANCZOS)  # Adjust size as needed
+
+        # Convert the resized image to a Tkinter-compatible image
+        tk_image = ImageTk.PhotoImage(resized_image)
+
+        # Display the image in a Label widget
+        image_label = tk.Label(new_window, image=tk_image)
+        image_label.image = tk_image  # Keep a reference to prevent garbage collection
+        image_label.pack(expand=True)
+
 
     def start_listening(self):
         """Starts listening for the wake word and other commands."""
@@ -67,7 +80,7 @@ class MagicUpApp:
         while True:
             print("Listening...")
             text = get_audio(self.webcam_index)
-            if TAKE_PICTURE in text:
+            if TAKE_PICTURE in text or input("Press Enter and type 'capture' to continue: ").strip().lower() == "capture":
                 print("I AM TAKING PICTURE")
                 self.take_picture()
                 # Button to open the full-screen image
@@ -131,11 +144,9 @@ class MagicUpApp:
             filename = "image.png"
             script_dir = os.path.dirname(__file__)
             image_path = os.path.join(script_dir, filename)
-            # Save the current frame as an image file
             if os.path.exists(image_path):
                 os.remove(image_path)
                 print(f"Existing file {image_path} removed.")
-            
             cv2.imwrite(image_path, frame)
             print(f"Image saved as {image_path}")
 
