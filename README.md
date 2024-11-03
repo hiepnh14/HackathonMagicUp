@@ -2,6 +2,13 @@
 
 Member: Jiechen Li, Jeff Luo, Hiep Nguyen
 
+
+## Links
+
+- [Demo Video](https://youtu.be/bLvHS5BqWbs) 
+
+- [Slides](https://docs.google.com/presentation/d/18BfE0v86iz50tZHiundPFp1a1IkfIapSqml-f-MqXQI/edit?usp=sharing) 
+
 ## Inspiration
 
 The beauty industry is booming, with U.S. consumers spending $89.7 billion annually and global revenue projected to reach $688.89 billion by 2028 ([Statista.com](https://www.statista.com/outlook/cmo/beauty-personal-care/worldwide)). Consumers increasingly seek personalized makeup experiences, with 75% responding positively to tailored recommendations. Social media also plays a major role, influencing 42% of buyers aged 18-24. Also, 67% of beauty shoppers say they turn to influencers to discover new products. ([Swnsdigital.com](https://swnsdigital.com/us/2017/06/women-spend-a-quarter-of-a-million-dollars-on-their-appearance-in-a-lifetime/), [Terakeet](https://terakeet.com/blog/beauty-industry/)).
@@ -84,9 +91,7 @@ Overcoming these technical barriers and coordinating complex interactions betwee
   - **Makeup Influencers**: Enable influencers to teach efficient makeup techniques with MagicUp, fostering community engagement and promoting the tool, helping influencers retain followers while popularizing MagicUp.
 
 
-## Link
 
-- [Slides](https://docs.google.com/presentation/d/18BfE0v86iz50tZHiundPFp1a1IkfIapSqml-f-MqXQI/edit?usp=sharing) 
 
 ## Instruction
 
