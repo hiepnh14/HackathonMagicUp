@@ -51,7 +51,8 @@ def evaluate(image_path='./imgs/116.jpg', cp='cp/79999_iter.pth'):
 
     # if not os.path.exists(respth):
     #     os.makedirs(respth)
-
+    script_dir = os.path.dirname(__file__)
+    cp = os.path.join(script_dir, cp)
     n_classes = 19
     net = BiSeNet(n_classes=n_classes)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

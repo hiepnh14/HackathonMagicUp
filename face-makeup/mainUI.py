@@ -47,21 +47,20 @@ class MagicUpApp:
         self.start_listening()
         
 
-        # Button to open the full-screen image
-        app.main(image_path='image.png', file_path="generated_image.png")
-        print("DONE GENERATING")
-        self.open_image()
+        
 
     def open_image(self, image_path = "generated_image.png"):
         # Create a new Toplevel window and show the image in full-screen
         new_window = tk.Toplevel(self.root)
+        script_dir = os.path.dirname(__file__)
+        image_path = os.path.join(script_dir, image_path)
         ImageViewer(new_window, image_path)
 
     def start_listening(self):
         """Starts listening for the wake word and other commands."""
         if self.webcam_index is not None:
-            # threading.Thread(target=self.listen_for_wake_word, daemon=True).start()
-            self.listen_for_wake_word()
+            threading.Thread(target=self.listen_for_wake_word, daemon=True).start()
+            # self.listen_for_wake_word()
     def listen_for_wake_word(self):
         """Continuously listens for the wake word and triggers actions accordingly."""
       
@@ -71,6 +70,10 @@ class MagicUpApp:
             if TAKE_PICTURE in text:
                 print("I AM TAKING PICTURE")
                 self.take_picture()
+                # Button to open the full-screen image
+                app.main(image_path='image.png', file_path="generated_image.png")
+                print("DONE GENERATING")
+                self.open_image()
                 break
 
             
@@ -126,13 +129,15 @@ class MagicUpApp:
         ret, frame = self.cap.read()
         if ret:
             filename = "image.png"
+            script_dir = os.path.dirname(__file__)
+            image_path = os.path.join(script_dir, filename)
             # Save the current frame as an image file
-            if os.path.exists(filename):
-                os.remove(filename)
-                print(f"Existing file {filename} removed.")
+            if os.path.exists(image_path):
+                os.remove(image_path)
+                print(f"Existing file {image_path} removed.")
             
-            cv2.imwrite(filename, frame)
-            print(f"Image saved as {filename}")
+            cv2.imwrite(image_path, frame)
+            print(f"Image saved as {image_path}")
 
 # Create the main Tkinter window and run the application
 # root = tk.Tk()

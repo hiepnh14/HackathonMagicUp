@@ -17,11 +17,13 @@ def main(userRequest=None, image_path=None, file_path='generated_image.png'):
     if not userRequest:
         userRequest = "I want to have a feminine makeup look for halloween."
     try:
+        
+        image_array = applyMakeup(image_path, userRequest)
+        image = Image.fromarray(image_array)
+        file_path = os.path.join(script_dir, file_path)
         if os.path.exists(file_path):
             os.remove(file_path)
             print(f"Existing file {file_path} removed.")
-        image_array = applyMakeup(image_path, userRequest)
-        image = Image.fromarray(image_array)
         image.save(file_path)
         print(f"Image saved successfully to {file_path}")
     except Exception as e:

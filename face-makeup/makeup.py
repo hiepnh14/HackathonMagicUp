@@ -61,7 +61,8 @@ def makeup(image_path, colors, cp='cp/79999_iter.pth'):
     # 12 upper lip
     # 13 lower lip
     # 17 hair
-
+    script_dir = os.path.dirname(__file__)
+    cp = os.path.join(script_dir, cp)
     # args = parse_args()
     atts = ['skin', 'l_brow', 'r_brow', 'l_eye', 'r_eye', 'eye_g', 'l_ear', 'r_ear', 'ear_r',
             'nose', 'mouth', 'u_lip', 'l_lip', 'neck', 'neck_l', 'cloth', 'hair', 'hat']
