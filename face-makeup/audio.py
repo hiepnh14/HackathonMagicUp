@@ -77,4 +77,21 @@ def record_speech(device=get_webcam_index()):
             
         except Exception as e:
             print(f"Error: {e}")
+<<<<<<< HEAD
 
+=======
+            
+# if webcam_index is not None:
+#     while True:
+#         print("Listening...")
+#         text = get_audio(webcam_index)
+#         if WAKE in text:
+#             speak("I am ready")
+#             print("I am ready")
+#             text = get_audio(webcam_index)
+#             if BYE in text:
+#                 speak("Goodbye")
+#                 break
+# else:
+#     print("No valid webcam audio device found. Exiting.")
+>>>>>>> 529eb174718af648fb31807fb4fb88a9bf5c8802

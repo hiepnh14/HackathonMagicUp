@@ -1,7 +1,12 @@
 import tkinter as tk
 from PIL import Image, ImageTk, ImageSequence
+<<<<<<< HEAD
 from audio import get_audio, speak, get_webcam_index, record_speech
 from mainUI import MagicUpApp
+=======
+from audio import get_audio, speak, get_webcam_index, record_speech  # Make sure audio functions are in audio.py
+from mainUI import MagicUpApp  # Ensure MagicUpApp is defined in magicup_app.py
+>>>>>>> 529eb174718af648fb31807fb4fb88a9bf5c8802
 import threading
 
 gif_path = "pic/face-makeup.gif"
@@ -37,6 +42,10 @@ class MainWindow:
         self.display_text()
         self.setup_microphone_icon()
 
+<<<<<<< HEAD
+=======
+        # Label for the microphone prompt text
+>>>>>>> 529eb174718af648fb31807fb4fb88a9bf5c8802
         self.prompt_label = tk.Label(self.mic_frame, text="Try to say: 'Hi' to start! And tell me what makeup do you want!", 
                                      font=("Arial", 20), fg="white", bg="black")
         self.prompt_label.pack(side="left")
@@ -76,6 +85,7 @@ class MainWindow:
 
     def start_listening(self):
         if self.webcam_index is not None:
+<<<<<<< HEAD
             self.listener_thread = threading.Thread(target=self.listen_for_wake_word, daemon=True)
             self.listener_thread.start()
 
@@ -96,8 +106,28 @@ class MainWindow:
                     break
             except Exception as e:
                 print(f"Error while listening: {e}")
+=======
+            threading.Thread(target=self.listen_for_wake_word, daemon=True).start()
+            # self.listen_for_wake_word()
+    def listen_for_wake_word(self):
+        """Continuously listens for the wake word and triggers actions accordingly."""
+      
+        while True:
+            print("Listening...")
+            text = get_audio(self.webcam_index)
+            if WAKE in text:
+                print("I AM READY")
+                
+                request = record_speech()
+                self.open_magicup_app(request = request)
                 break
 
+            elif BYE in text:
+                speak("Goodbye")
+                self.root.quit()
+>>>>>>> 529eb174718af648fb31807fb4fb88a9bf5c8802
+                break
+                
     def display_text(self, index=0):
         global flash_count
         if index <= len(full_text):
@@ -124,8 +154,12 @@ class MainWindow:
         
         new_root = tk.Toplevel(self.root)
         MagicUpApp(new_root, request)
+<<<<<<< HEAD
         self.root.withdraw()
 
+=======
+        # self.root.destroy()
+>>>>>>> 529eb174718af648fb31807fb4fb88a9bf5c8802
 
 
 if __name__ == "__main__":

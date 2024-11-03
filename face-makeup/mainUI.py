@@ -84,7 +84,7 @@ class MagicUpApp:
                 print("I AM TAKING PICTURE")
                 self.take_picture()
                 # Button to open the full-screen image
-                app.main(image_path='image.png', file_path="generated_image.png")
+                app.main(userRequest=self.request, image_path='image.png', file_path="generated_image.png")
                 print("DONE GENERATING")
                 self.open_image()
                 break
@@ -112,7 +112,7 @@ class MagicUpApp:
         if len(faces) > 0:
             if not self.face_detected:
                 self.face_detected = True
-                self.prompt_label.config(text="Your face has been detected. Do you want to take a photo and generate today's makeup?")
+                self.prompt_label.config(text=f"Your request is: {self.request}, face detected.")
             self.last_face_detected_time = time.time()
             
             for (x, y, w, h) in faces:
