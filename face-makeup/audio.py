@@ -48,7 +48,36 @@ BYE = "bye"
 
 # Get the WebCam device index
 webcam_index = get_webcam_index()
-
+def record_speech(device=get_webcam_index()):
+    global chat_messages
+    recognizer = sr.Recognizer()
+    with sr.Microphone(device) as source:
+        
+        print("Listening...")
+        
+        try:
+            # audio = recognizer.listen(source, phrase_time_limit=20, timeout=20)  # Adjust timeout if needed
+            # text =  recognizer.recognize_google(audio)
+            # audio = _record_audio()
+            audio = recognizer.record(source, duration=5)
+            # text = _transcribe_audio(audio)
+            text =  recognizer.recognize_google(audio)
+            # text = transcription.text
+            
+            print(text)
+            
+            # Simulate a computer response (can be customized)
+            return text
+            
+        except sr.UnknownValueError:
+            print("Could not understand audio")
+            
+        except sr.RequestError:
+            print("Could not request results; check internet")
+            
+        except Exception as e:
+            print(f"Error: {e}")
+            
 # if webcam_index is not None:
 #     while True:
 #         print("Listening...")

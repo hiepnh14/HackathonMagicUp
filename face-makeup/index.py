@@ -1,6 +1,6 @@
 import tkinter as tk
 from PIL import Image, ImageTk, ImageSequence
-from audio import get_audio, speak, get_webcam_index  # Make sure audio functions are in audio.py
+from audio import get_audio, speak, get_webcam_index, record_speech  # Make sure audio functions are in audio.py
 from mainUI import MagicUpApp  # Ensure MagicUpApp is defined in magicup_app.py
 import threading
 # Paths to the GIF files
@@ -47,7 +47,7 @@ class MainWindow:
         self.setup_microphone_icon()
 
         # Label for the microphone prompt text
-        self.prompt_label = tk.Label(self.mic_frame, text="Try to say: 'Hi' to start!", 
+        self.prompt_label = tk.Label(self.mic_frame, text="Try to say: 'Hi' to start! And tell me what makeup do you want!", 
                                      font=("Arial", 20), fg="white", bg="black")
         self.prompt_label.pack(side="left")
 
@@ -94,7 +94,7 @@ class MainWindow:
         """Starts listening for the wake word and other commands."""
         if self.webcam_index is not None:
             threading.Thread(target=self.listen_for_wake_word, daemon=True).start()
-
+            # self.listen_for_wake_word()
     def listen_for_wake_word(self):
         """Continuously listens for the wake word and triggers actions accordingly."""
       
@@ -103,14 +103,16 @@ class MainWindow:
             text = get_audio(self.webcam_index)
             if WAKE in text:
                 print("I AM READY")
-                self.open_magicup_app()
+                
+                request = record_speech()
+                self.open_magicup_app(request = request)
                 break
 
             elif BYE in text:
                 speak("Goodbye")
                 self.root.quit()
                 break
-
+                
     def display_text(self, index=0):
         global flash_count
         if index <= len(full_text):
@@ -133,12 +135,12 @@ class MainWindow:
             # Restart the gradual text display after flashing
             self.display_text()
 
-    def open_magicup_app(self):
+    def open_magicup_app(self, request):
         """Opens the MagicUpApp when the wake word is detected."""
         
         print("What the hell")
         new_root = tk.Toplevel(self.root)
-        MagicUpApp(new_root)
+        MagicUpApp(new_root, request)
         # self.root.destroy()
 
 
