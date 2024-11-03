@@ -5,7 +5,11 @@ from io import BytesIO
 import os
 import json
 import re
-openai.api_key = os.getenv("OPENAI_API_KEY")  
+import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+openai.api_key = config['section']['OPENAI_API_KEY']
 # Set your OpenAI API key
 # openai.api_key = "YOUR_API_KEY"
 

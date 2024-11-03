@@ -20,62 +20,21 @@ def update_chat_display():
     for message in recent_messages:
         chat_display.insert(tk.END, message + "\n")
     chat_display.see(tk.END)
-def _record_audio():
-    """Records audio and stops when there is no voice detected for 3 seconds."""
-    CHUNK = 1024
-    FORMAT = pyaudio.paInt16
-    CHANNELS = 1
-    RATE = 44100
-    SILENCE_THRESHOLD = 500  # Adjust based on microphone sensitivity
-    MAX_SILENT_FRAMES = int(3 * RATE / CHUNK)  # 3 seconds of silence
-
-    p = pyaudio.PyAudio()
-    stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
-
-    frames = []
-    silent_chunks = 0
-
-    while True:
-        data = stream.read(CHUNK)
-        frames.append(data)
-
-        # Check volume level
-        audio_data = np.frombuffer(data, dtype=np.int16)
-        volume = np.linalg.norm(audio_data)
-
-        if volume < SILENCE_THRESHOLD:
-            silent_chunks += 1
-        else:
-            silent_chunks = 0
-
-        # Stop if silence is detected for 3 seconds
-        if silent_chunks > MAX_SILENT_FRAMES:
-            break
-
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
-
-    # Save recorded frames to an audio buffer
-    audio_data = io.BytesIO()
-    wf = wave.open(audio_data, 'wb')
-    wf.setnchannels(CHANNELS)
-    wf.setsampwidth(p.get_sample_size(FORMAT))
-    wf.setframerate(RATE)
-    wf.writeframes(b''.join(frames))
-    wf.close()
-    
-    audio_data.seek(0)
-    return audio_data
-
-def _transcribe_audio(self, audio_data):
-    """Sends audio data to Whisper API and returns the transcription."""
-    response = openai.Audio.transcribe("whisper-1", audio_data)
-    return response["text"]
+def get_webcam_index():
+    """Find and return the index of the webcam audio device."""
+    pa = pyaudio.PyAudio()
+    for i in range(pa.get_device_count()):
+        dev_info = pa.get_device_info_by_index(i)
+        if "Webcam" in dev_info["name"]:
+            print(f"Using device {i}: {dev_info['name']}")
+            return i
+    print("Webcam audio device not found.")
+    return None
+get_webcam_index = get_webcam_index()
 # Function to record and transcribe speech
-def record_speech():
+def record_speech(device=get_webcam_index):
     global chat_messages
-    with sr.Microphone() as source:
+    with sr.Microphone(device) as source:
         chat_messages.append("Listening...")
         print("Listening...")
         update_chat_display()

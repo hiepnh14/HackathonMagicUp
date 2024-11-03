@@ -95,12 +95,13 @@ def makeup(image_path, colors, cp='cp/79999_iter.pth'):
     # colors = [[255, 223, 186], [255, 105, 180], [255, 0, 102], [0, 191, 255]]
     for part, color in zip(parts, colors):
         image = changePartColor(image, parsing, part, color)
+# can comment from this
+    # cv2.imshow('image', cv2.resize(ori, (512, 512)))
+    # cv2.imshow('color', cv2.resize(image, (512, 512)))
 
-    cv2.imshow('image', cv2.resize(ori, (512, 512)))
-    cv2.imshow('color', cv2.resize(image, (512, 512)))
-
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+    # to this
     return image
 
 
