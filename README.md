@@ -27,11 +27,12 @@ We combined hardware and advanced AI software for a seamless user experience. Th
 
 ## Challenges we ran into
 
-For **hardware**, we encountered significant challenges in adapting various external devices and sensors, including the camera, microphone, speaker, and screen. One specific issue was the camera driver, which was initially broken and prevented proper functionality. By carefully studying the hardware documentation, we identified and temporarily fixed the driver bug, allowing us to capture images for testing. However, after a system reboot to relocate for video recording, the setup failed to function again, revealing the fragility of our code under real-world conditions.
+For **hardware**, we encountered significant challenges in adapting various external devices and sensors, including the camera, microphone, speaker, and screen. One major issue was the camera driver, which was initially broken and prevented proper functionality. By carefully studying the hardware documentation, we identified and temporarily fixed the driver bug, allowing us to capture images for testing. However, after a system reboot to relocate for video recording, the setup failed again, revealing the fragility of our code under real-world conditions. This instability was eventually traced to an unstable power supply on the Orange Pi under high load. With only four hours before submission, we stabilized the system by securing a more consistent power source, allowing us to complete a successful demonstration.
 
-We also faced issues with the Bluetooth speaker, which could not be set as the default audio device. In response, we implemented an alternative solution by displaying AI-generated instructions as text on the screen instead of audio playback. While this workaround preserved core functionality, the underlying setup remained sensitive to device and software restarts, underscoring the challenges of hardware-software integration under time constraints.
+We also faced issues with the Bluetooth speaker, which could not be set as the default audio device. To work around this, we implemented a solution to display AI-generated instructions as text on the screen instead of using audio playback. While this preserved core functionality, the setup remained sensitive to restarts. Nevertheless, we maintained reliable functionality throughout our final tests.
 
-On the **software** side, package dependency conflicts required extensive debugging, and while our face parsing model performed well on a PC, running it on our hardware was another challenge. The hardware’s limited processing power prevented the model from rendering as precisely as intended, which affected display quality. These challenges highlighted the limitations of our setup and demonstrated the complexities of adapting high-performance software to constrained hardware environments.
+On the **software** side, package dependency conflicts required extensive debugging, and while our face parsing model ran smoothly on a PC, running it on our hardware was another challenge due to limited processing power. This affected the display quality, as the hardware struggled to keep up with real-time rendering. Despite these constraints, we successfully optimized the model’s performance on the Orange Pi, allowing us to deliver a functional prototype. These experiences underscored the complexities of adapting high-performance software to constrained hardware environments, ultimately pushing us to find creative solutions that enabled our final success.
+
 
 
 ---
@@ -39,28 +40,27 @@ On the **software** side, package dependency conflicts required extensive debugg
 ## Accomplishments that we're proud of
 
 We’re proud to have seen our vision for MagicUp come to life during this hackathon, transforming the concept of a “magic mirror” into a functional, innovative tool. Through effective collaboration, we achieved integration of hardware and software components, and we successfully ran the system during testing. Our custom-built system enabled MagicUp to capture a raw photo from the hardware camera, which was processed through our makeup model with enhancements from OpenAI and Google APIs to deliver personalized, realistic makeup guidance.
+One particular challenge involved the Bluetooth speaker, which we couldn’t set as the default audio device. After troubleshooting without success, we adapted our approach by switching to text-based instructions displayed on the screen. This allowed us to maintain functionality in the short term. We also encountered an issue with system reboots when moving to a quieter area for video recording. After extensive troubleshooting, we identified the cause—unstable power supply on the Orange Pi under high load—and resolved it just four hours before submission. This last-minute fix stabilized the setup and allowed us to successfully demonstrate the final product.
+Overcoming these technical barriers and coordinating complex interactions between hardware and AI-driven software was a rewarding achievement. This experience not only showcased our technical skills but also underscored the collaborative spirit and innovative thinking that made MagicUp possible.
 
-One particular challenge involved the Bluetooth speaker, which we couldn’t set as the default audio device. After troubleshooting without success, we adapted our approach by switching to text-based instructions displayed on the screen. While this allowed us to maintain functionality in the short term, the setup remained sensitive to reboots. In the final moments, we encountered additional system issues upon rebooting for video recording, which prevented us from rerunning the program successfully. This highlighted the fragility of our temporary fixes, especially under real-world conditions.
-
-Despite these setbacks, we’re proud of our accomplishments in overcoming technical barriers and coordinating complex interactions between hardware and AI-driven software. This experience not only showcased our technical skills but also underscored the collaborative spirit and innovative thinking that allowed us to push the project forward.
 
 ---
 
 ## What we learned
 
-- **Effective Team Collaboration**: This project reinforced the importance of clear communication and teamwork, especially when integrating hardware and software components. Each team member’s role was crucial in overcoming the technical obstacles, allowing us to build a functioning prototype despite the setbacks.
+- **Effective Team Collaboration**: This project reinforced the importance of clear communication and teamwork, especially when integrating hardware and software components. Each team member’s role was crucial in overcoming the technical obstacles, allowing us to build a fully functional prototype.
 
-- **Technical Problem-Solving**: Adapting various external devices taught us valuable troubleshooting skills. For instance, while we temporarily fixed the camera driver issue and resolved some package conflicts, the fragile stability of the code after reboots underscored the challenges of creating a durable solution under time constraints.
+- **Technical Problem-Solving**: Adapting various external devices taught us valuable troubleshooting skills. For example, we resolved camera driver issues and handled package conflicts. Our final challenge with power stability on the Orange Pi highlighted the importance of power management under high-load conditions for a robust system.
 
-- **Adaptability and Quick Problem-Solving**: When the Bluetooth speaker issue prevented audio playback, we quickly adapted by switching to text-based instructions. This workaround allowed us to maintain basic functionality but also highlighted the limitations of our short-term solutions.
+- **Adaptability and Quick Problem-Solving**: When the Bluetooth speaker issue prevented audio playback, we quickly adapted by switching to text-based instructions. This workaround allowed us to maintain functionality, and solving the power stability issue further reinforced our adaptability under pressure.
 
-- **Hardware-Software Coordination**: The most challenging part of the project was coordinating hardware and software to work in unison. Our face parsing model functioned well on a computer but struggled on our hardware due to processing limitations, affecting display quality. This experience showed us the intricacies of creating responsive, real-time applications on limited hardware.
+- **Hardware-Software Coordination**: The most challenging part of the project was achieving coordination between hardware and software. Our face parsing model ran smoothly on a computer but required adaptation on the Orange Pi due to performance limitations. This experience highlighted the complexities of developing real-time applications on hardware with limited processing power.
 
-- **Leveraging Open Source and APIs**: Customizing open-source models and integrating APIs like Snowboy and OpenAI expanded our understanding of working with external tools. These resources allowed for rapid development but required adaptation to meet the constraints of our specific hardware.
+- **Leveraging Open Source and APIs**: Customizing open-source models and integrating APIs like Snowboy and OpenAI expanded our understanding of working with external tools. These resources accelerated development but required thoughtful adaptation for our hardware setup.
 
-- **User-Centric Design**: MagicUp’s design process deepened our understanding of creating intuitive, user-centered applications. Prioritizing accessibility and ease of use, even under technical constraints, was a valuable learning experience in balancing function and user experience.
+- **User-Centric Design**: MagicUp’s design process deepened our understanding of creating intuitive, user-centered applications. We prioritized accessibility and ease of use, even under technical constraints, which was a valuable lesson in balancing functionality with user experience.
 
-- **Time Management and Adaptability**: The hackathon’s time constraints taught us to adapt quickly, stay focused, and find creative solutions. While the temporary fixes were fragile, they allowed us to deliver a working prototype, emphasizing the need for resilient code and better preparation in the future.
+- **Time Management and Adaptability**: The hackathon’s time constraints taught us to adapt quickly, stay focused, and find creative solutions. The last-minute resolution of the power supply issue underscored the need for robust solutions, preparation, and adaptability under pressure.
 
 
 ---
@@ -83,6 +83,10 @@ Despite these setbacks, we’re proud of our accomplishments in overcoming techn
   - **Cosmetic Retail**: Deploy MagicUp in makeup stores to boost customer confidence in new products, supporting increased sales.
   - **Makeup Influencers**: Enable influencers to teach efficient makeup techniques with MagicUp, fostering community engagement and promoting the tool, helping influencers retain followers while popularizing MagicUp.
 
+
+## Link
+
+- [Slides](https://docs.google.com/presentation/d/18BfE0v86iz50tZHiundPFp1a1IkfIapSqml-f-MqXQI/edit?usp=sharing) 
 
 ## Instruction
 
